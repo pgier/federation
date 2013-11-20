@@ -1,14 +1,15 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
    <parent>
       <groupId>org.jboss</groupId>
       <artifactId>jboss-parent</artifactId>
-      <version>5</version>
+      <version>11-redhat-1</version>
    </parent>
    <modelVersion>4.0.0</modelVersion>
    <groupId>org.picketlink</groupId>
    <artifactId>picketlink-fed-parent</artifactId>
    <packaging>pom</packaging>
-   <version>2.1.9.SP2</version>
+   <version>2.1.9.SP2-redhat-SNAPSHOT</version>
    <name>PicketLink Federation - Parent</name>
    <url>http://labs.jboss.org/portal/picketlink/</url>
    <description>PicketLink is a cross-cutting project that handles identity  needs for the JEMS projects</description>
@@ -46,7 +47,6 @@
        <plugins>
           <plugin>
              <artifactId>maven-surefire-plugin</artifactId>
-             <version>2.10</version>
              <configuration>
                <printSummary>true</printSummary>
                <disableXmlReport>false</disableXmlReport>
@@ -62,52 +62,17 @@
           </plugin>
           <plugin>
              <groupId>org.apache.maven.plugins</groupId>
-             <artifactId>maven-antrun-plugin</artifactId>
-             <version>1.4</version>
-          </plugin>
-          <plugin>
-             <groupId>org.apache.maven.plugins</groupId>
-             <artifactId>maven-javadoc-plugin</artifactId>
-             <version>2.8</version>
-          </plugin>
-         <plugin>
-           <groupId>org.apache.maven.plugins</groupId>
-           <artifactId>maven-assembly-plugin</artifactId>
-           <version>2.3</version>
-           <executions>
-             <execution>
+             <artifactId>maven-assembly-plugin</artifactId>
+             <executions>
+            <execution>
               <id>create-binary</id>
-               <phase>package</phase>
-               <goals>
-                 <goal>single</goal>
-               </goals>
-               <configuration>
-                 <appendAssemblyId>false</appendAssemblyId>
-                 <archive>
-                   <manifestEntries>
-                     <Specification-Title>PicketLink</Specification-Title>
-                     <Specification-Version>${project.version}</Specification-Version>
-                     <Specification-Vendor>Red Hat Inc</Specification-Vendor>
-                     <Implementation-Title>PicketLink</Implementation-Title>
-                     <Implementation-Version>${project.version}</Implementation-Version>
-                     <Implementation-VendorId>org.picketlink</Implementation-VendorId>
-                     <Implementation-Vendor>Red Hat Inc</Implementation-Vendor>
-                     <Implementation-URL>http://jboss.org/picketlink</Implementation-URL>
-                   </manifestEntries>
-                 </archive>
-                 <descriptors>
-                   <descriptor>bin.xml</descriptor>
-                 </descriptors>
-               </configuration>
-             </execution>
-             <execution>
-                <id>create-source-file</id>
-                <phase>package</phase>
-                <goals>
-                  <goal>single</goal>
-                </goals>
-                <configuration>
-                 <archive>
+              <phase>package</phase>
+              <goals>
+                <goal>single</goal>
+              </goals>
+              <configuration>
+                <appendAssemblyId>false</appendAssemblyId>
+                <archive>
                   <manifestEntries>
                     <Specification-Title>PicketLink</Specification-Title>
                     <Specification-Version>${project.version}</Specification-Version>
@@ -117,57 +82,45 @@
                     <Implementation-VendorId>org.picketlink</Implementation-VendorId>
                     <Implementation-Vendor>Red Hat Inc</Implementation-Vendor>
                     <Implementation-URL>http://jboss.org/picketlink</Implementation-URL>
-                   </manifestEntries>
-                 </archive>
-                 <descriptors>
-                   <descriptor>sources.xml</descriptor>
-                 </descriptors>
-               </configuration>
-             </execution>
-           </executions>
-           <inherited>true</inherited>
-         </plugin>
+                  </manifestEntries>
+                </archive>
+                <descriptors>
+                  <descriptor>bin.xml</descriptor>
+                </descriptors>
+              </configuration>
+            </execution>
+            <execution>
+              <id>create-source-file</id>
+              <phase>package</phase>
+              <goals>
+                <goal>single</goal>
+              </goals>
+              <configuration>
+                <archive>
+                  <manifestEntries>
+                    <Specification-Title>PicketLink</Specification-Title>
+                    <Specification-Version>${project.version}</Specification-Version>
+                    <Specification-Vendor>Red Hat Inc</Specification-Vendor>
+                    <Implementation-Title>PicketLink</Implementation-Title>
+                    <Implementation-Version>${project.version}</Implementation-Version>
+                    <Implementation-VendorId>org.picketlink</Implementation-VendorId>
+                    <Implementation-Vendor>Red Hat Inc</Implementation-Vendor>
+                    <Implementation-URL>http://jboss.org/picketlink</Implementation-URL>
+                  </manifestEntries>
+                </archive>
+                <descriptors>
+                  <descriptor>sources.xml</descriptor>
+                </descriptors>
+              </configuration>
+            </execution>
+          </executions>
+             <inherited>true</inherited>
+          </plugin>
+          
+         
        </plugins>
      </pluginManagement>
    </build>
-  
-   <repositories>
-     <repository>
-       <id>jboss-public-repository-group</id>
-       <name>JBoss Public Maven Repository Group</name>
-       <url>http://repository.jboss.org/nexus/content/groups/public/</url>
-       <layout>default</layout>
-       <releases>
-         <enabled>true</enabled>
-         <updatePolicy>never</updatePolicy>
-       </releases>
-       <snapshots>
-         <enabled>true</enabled>
-         <updatePolicy>never</updatePolicy>
-       </snapshots>
-     </repository>
-    <repository>
-      <id>repository.jboss.org</id>
-      <name>JBoss Repository</name>
-      <layout>default</layout>
-      <url>http://repository.jboss.org/maven2/</url>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>snapshots.jboss.org</id>
-      <name>JBoss Snapshots Repository</name>
-      <layout>default</layout>
-      <url>http://snapshots.jboss.org/maven2/</url>
-      <snapshots>
-         <enabled>true</enabled>
-      </snapshots>
-      <releases>
-         <enabled>false</enabled>
-      </releases>
-    </repository>
-  </repositories>
   
   <dependencyManagement>
    <dependencies>
@@ -237,4 +190,5 @@
    </dependencies>
   </dependencyManagement>
 
+<!-- Modified by POM Artifact-Version Manipulator version 1.3.6-redhat-3-eap (681535d) -->
 </project>
